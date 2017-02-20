@@ -122,7 +122,7 @@ function processScenario (casper, scenario, scenarioOrVariantLabel, scenarioLabe
     });
 
     casper.then(function () {
-      this.echo('Current location is ' + url, 'info');
+      this.echo('Scenario: ' + scenario.label + ' | Location: ' + url + ' | Viewport: ' + makeSafe(vp.name) + ' (' + (vp.width || vp.viewport.width) + 'x' + (vp.height || vp.viewport.height) + ')', 'info');
 
       if (config.debug) {
         var src = this.evaluate(function () {
@@ -147,7 +147,7 @@ function processScenario (casper, scenario, scenarioOrVariantLabel, scenarioLabe
     });
 
     this.then(function () {
-      this.echo('Capturing screenshots for ' + makeSafe(vp.name) + ' (' + (vp.width || vp.viewport.width) + 'x' + (vp.height || vp.viewport.height) + ')', 'info');
+      // this.echo('Viewport: ' + makeSafe(vp.name) + ' (' + (vp.width || vp.viewport.width) + 'x' + (vp.height || vp.viewport.height) + ')', 'info');
 
       // HIDE SELECTORS WE WANT TO AVOID
       if (scenario.hasOwnProperty('hideSelectors')) {
