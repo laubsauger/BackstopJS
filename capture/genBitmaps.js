@@ -155,8 +155,6 @@ function processScenario (casper, scenario, scenarioOrVariantLabel, scenarioLabe
     });
 
     this.then(function () {
-      // this.echo('Viewport: ' + makeSafe(vp.name) + ' (' + (vp.width || vp.viewport.width) + 'x' + (vp.height || vp.viewport.height) + ')', 'info');
-
       // HIDE SELECTORS WE WANT TO AVOID
       if (scenario.hasOwnProperty('hideSelectors')) {
         scenario.hideSelectors.forEach(function (o, i, a) {
