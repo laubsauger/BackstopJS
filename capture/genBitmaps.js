@@ -55,6 +55,15 @@ casper.on('remote.message', function (message) {
   consoleBuffer = consoleBuffer + '\n' + message;
 });
 
+// Output Casper Scripts Errors
+casper.on('error', function(msg, trace) {
+  casper.echo('Error: ' + msg, 'ERROR');
+});
+// Output Page Errors
+casper.on('page.error', function(msg, trace) {
+  casper.echo('Page Error: ' + msg, 'ERROR');
+});
+
 function capturePageSelectors (scenarios, viewports, bitmapsReferencePath, bitmapsTestPath, isReference) {
   var screenshotNow = new Date();
   var screenshotDateTime = screenshotNow.getFullYear() + pad(screenshotNow.getMonth() + 1) + pad(screenshotNow.getDate()) + '-' + pad(screenshotNow.getHours()) + pad(screenshotNow.getMinutes()) + pad(screenshotNow.getSeconds());
