@@ -5,6 +5,7 @@ var fs = require('fs');
 var cwd = fs.workingDirectory;
 var scriptName = fs.absolute(require('system').args[3]);
 var __dirname = scriptName.substring(0, scriptName.lastIndexOf('/'));
+var colorizer = require('colorizer').create('Colorizer');
 
 var selectorNotFoundPath = __dirname + '/resources/selectorNotFound_noun_164558_cc.png';
 var hiddenSelectorPath = __dirname + '/resources/hiddenSelector_noun_63405.png';
@@ -55,11 +56,9 @@ casper.on('remote.message', function (message) {
   consoleBuffer = consoleBuffer + '\n' + message;
 });
 
-// Output Casper Scripts Errors
 casper.on('error', function(msg, trace) {
   casper.echo('Error: ' + msg, 'ERROR');
 });
-// Output Page Errors
 casper.on('page.error', function(msg, trace) {
   casper.echo('Page Error: ' + msg, 'ERROR');
 });
@@ -131,7 +130,7 @@ function processScenario (casper, scenario, scenarioOrVariantLabel, scenarioLabe
     });
 
     casper.then(function () {
-      this.echo('Scenario: ' + scenario.label + ' | Location: ' + url + ' | Viewport: ' + makeSafe(vp.name) + ' (' + (vp.width || vp.viewport.width) + 'x' + (vp.height || vp.viewport.height) + ')', 'info');
+      console.log(colorizer.colorize('Scenario: ', 'COMMENT') + scenario.label + ' | ' + colorizer.colorize('Location: ', 'COMMENT') + url + ' | ' + colorizer.colorize('Viewport: ', 'COMMENT') + makeSafe(vp.name) + ' (' + (vp.width || vp.viewport.width) + 'x' + (vp.height || vp.viewport.height) + ')');
 
       if (config.debug) {
         var src = this.evaluate(function () {
